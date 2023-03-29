@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;648&display=swap" rel="stylesheet">
-  
+
   <title>Cóc Vương 2023 FUDA</title>
   <style>
     .body {
@@ -21,13 +21,15 @@
       padding: 0;
       margin: 0 auto;
     }
+
     body {
       background-color: black;
       font-family: 'Raleway';
       /* font-weight: bold; */
-      margin: 0!important;
-      color: #FFF!important;
+      margin: 0 !important;
+      color: #FFF !important;
     }
+
     .text {
       font-size: 6vh;
       margin: 0 auto;
@@ -38,61 +40,69 @@
       text-transform: uppercase;
       color: aqua;
     }
+
     #noidung {
-      font-weight: 800!important;
+      font-weight: 800 !important;
     }
+
     .text-bottom {
       transform: translateY(5vh);
       font-size: 10vh;
     }
-    #tongdiem, #lop {
+
+    #tongdiem,
+    #lop {
       font-family: Arial, Helvetica, sans-serif;
       font-weight: normal;
     }
+
     #tongdiem {
       color: aqua;
     }
+
     .tongdiem {
       font-size: 12vh;
     }
-    .text a {
+
+    a {
       color: aqua;
       background-color: transparent;
       text-decoration: none;
     }
-    .text a:hover {
-      color: lightblue;
-      background-color: transparent;
-      text-decoration: underline;
-    }
   </style>
 </head>
 
-<body>
+<body><a href="/suathongtin.html" target="_blank">
   <div class="body">
     <div class="text">
       <div>
-        <a href="/suathongtin.html" target="_blank"><span id="noidung"></span></a>
+        <span id="noidung"></span>
       </div>
       <div class="text-mid">
         Lớp PC<span id="lop"></span>
       </div>
       <div class="text-bottom">
         <span id="tongdiem"></span>
-         điểm
+        điểm
       </div>
     </div>
-  </div>
+  </div></a>
 
 
   <script>
 
     let noidung = document.getElementById("noidung");
-    noidung.innerHTML = localStorage.getItem("noidung");
-    let lop = document.getElementById("lop");
-    lop.innerHTML = localStorage.getItem("lop");
-    let tongdiem = document.getElementById("tongdiem");
-    tongdiem.innerHTML = localStorage.getItem("tongdiem");
+    let localStorageNoiDung = localStorage.getItem("noidung");
+    if (localStorageNoiDung) {
+      document.getElementsByClassName("text")[0].style.display = "block";
+      noidung.innerHTML = localStorageNoiDung;
+      let lop = document.getElementById("lop");
+      lop.innerHTML = localStorage.getItem("lop");
+      let tongdiem = document.getElementById("tongdiem");
+      tongdiem.innerHTML = localStorage.getItem("tongdiem");
+    } else {
+      document.getElementsByClassName("text")[0].style.display = "none";
+    }
 
   </script>
 </body>
