@@ -1,6 +1,7 @@
 {
   "hosting": {
-    "public": "Y",
+    "public": "public",
+    "site": "vovinam-tranhcupcocvang",
     "ignore": [
       "firebase.json",
       "**/.*",
