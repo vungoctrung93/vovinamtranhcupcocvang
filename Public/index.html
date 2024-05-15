@@ -5,90 +5,20 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="refresh" content="2">
+  <!-- <meta http-equiv="refresh" content="2"> -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;648&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+
 
   <title>Vovinam Tranh Cúp Cóc Vàng</title>
-  <style>
-    .body {
-      background-image: url("./images/nen.PNG");
-      background-repeat: no-repeat;
-      background-size: auto 100%;
-      background-position: center;
-      height: 100vh;
-      padding: 0;
-      margin: 0 auto;
-    }
-
-    body {
-      background-color: black;
-      font-family: 'Raleway';
-      /* font-weight: bold; */
-      margin: 0 !important;
-      color: #FFF !important;
-    }
- 
-    .text {
-      font-size: 6vh;
-      margin: 0 auto;
-      width: 100%;
-      text-align: center;
-      vertical-align: middle;
-      transform: translateY(19vh);
-      text-transform: uppercase;
-      color: yellow;
-      text-shadow: 0em 0em 0em #ff0000,
-                0em 0em 1.2em #ff0000,
-                0em 0em 1em #ff0000,
-                0em 0em 0.8em #ff0000,
-                0em 0em 0.6em #ff0000,
-                0em 0em 0.4em #ff0000,
-                0em 0em 0.3em #ff0000,
-                0em 0em 0.2em #ff0000
-    }
-
-    #noidung {
-      font-weight: 800 !important;
-      font-size: 11vh;
-    }
-
-    .text-bottom {
-      transform: translateY(3vh);
-      font-size: 14vh;
-      color: yellow;
-      text-shadow: 0em 0em 0em #ff0000,
-                0em 0em 1.2em #ff0000,
-                0em 0em 1em #ff0000,
-                0em 0em 0.8em #ff0000,
-                0em 0em 0.6em #ff0000,
-                0em 0em 0.4em #ff0000,
-                0em 0em 0.3em #ff0000,
-                0em 0em 0.2em #ff0000
-    }
-
-    #tongdiem,
-    #lop {
-      font-family: Arial, Helvetica, sans-serif;
-      font-weight: normal;
-    }
-
-
-    .tongdiem {
-      font-size: 11vh;
-    }
-
-    a {
-      color: yellow;
-      background-color: transparent;
-      text-decoration: none;
-      text-shadow: 0px 0px 26px #000000
-    }
-  </style>
 </head>
 
-<body><a href="./suathongtin.html" target="_blank">
+<body>
+  <!-- <a href="./suathongtin.html" target="_blank"> -->
   <div class="body">
     <div class="text">
       <div>
@@ -102,10 +32,57 @@
         điểm
       </div>
     </div>
-  </div></a>
+  </div>
+<!-- </a> -->
 
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCPlKZds5tvDwU4hKUp_GGU2D1nc1biDtQ",
+      authDomain: "olympicquynhoncampus.firebaseapp.com",
+      projectId: "olympicquynhoncampus",
+      storageBucket: "olympicquynhoncampus.appspot.com",
+      messagingSenderId: "758747044525",
+      appId: "1:758747044525:web:2fbc9000e189632f9c0424"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
 
-  <script>
+    import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+    const auth = getAuth();
+    
+    var provider = new auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+    firebase.auth()
+      .signInWithPopup(provider)
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        // IdP data available in result.additionalUserInfo.profile.
+          // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
+
 
     let noidung = document.getElementById("noidung");
     let localStorageNoiDung = localStorage.getItem("noidung");
