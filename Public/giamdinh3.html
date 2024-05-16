@@ -18,13 +18,27 @@
 </head>
 
 <body>
-  <button id="login">Google Login</button>
-  <button id="logout">Google Logout</button>
-  <!-- <a href="./suathongtin.html" target="_blank"> -->
+  <div class="button-group">
+    <button id="loginGoogle">Google Login</button>
+    <button id="logout">Logout</button>
+    <button id="loginEmail">Email Login</button>
+  </div>
+  <div class="form-container" id="myForm">
+    <h1>Login</h1>
+
+    <label for="email"><b>Email</b></label>
+    <input type="text" placeholder="Enter Email" id="email" required>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" id="password" required>
+
+    <button type="button" class="btn" id="loginEmailPopup">Login</button>
+    <button type="button" class="btn cancel" id="closeForm">Cancel</button>
+  </div>
   <div class="body">
     <div class="text">
       <div>
-        <span id="noidung">Giám định ３</span>
+        <span id="noidung">Giám định 3</span>
       </div>
       <!-- 
       <div class="text-mid">
@@ -47,8 +61,9 @@
   <script type="module">
     // Import the functions you need from the SDKs you need
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import {getDatabase, ref, get, set, child, update, remove} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js'
+    import { getDatabase, ref, get, set, child, update, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js'
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -67,65 +82,91 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
     const auth = getAuth();
-    const provider = new GoogleAuthProvider()
+    const providerGoogle = new GoogleAuthProvider()
 
-    const loginButton = document.getElementById('login')
-    const logoutButton = document.getElementById('logout')
-    loginButton.onclick = async () => {
-      signInWithPopup(auth, provider)
+    const loginGoogleButton = document.getElementById('loginGoogle')
+    loginGoogleButton.onclick = async () => {
+      signInWithPopup(auth, providerGoogle)
         .then((result) => {
           const user = result.user
-          console.log(user);
+          // console.log(user);
         }).catch((error) => {
           const errorCode = error.code;
           const errorMessage = error.message
+          console.log(error);
         })
     }
+    const emailLoginForm = document.getElementById("myForm");
+    emailLoginForm.style.display = 'none'
+    const loginEmailButton = document.getElementById('loginEmail')
+    loginEmailButton.onclick = async () => {
+      emailLoginForm.style.display = "block";
+    }
+    const loginEmailClose = document.getElementById('closeForm')
+    loginEmailClose.onclick = async () => {
+      emailLoginForm.style.display = "none";
+    }
+
+    const loginEmailPopup = document.getElementById('loginEmailPopup');
+    loginEmailPopup.onclick = function () {
+      let email = document.getElementById('email').value;
+      if (email) {
+        let password = document.getElementById('password').value;
+
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            // Signed in 
+            const user = userCredential.user;
+            // console.log(user);
+            // ...
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
+
+
+    const logoutButton = document.getElementById('logout');
+    logoutButton.style.display = 'none'
     logoutButton.onclick = async () => {
       signOut(auth).then(() => {
-        alert("You have signed out successfully!");
+        console.log("You have signed out successfully!");
       }).catch((error) => { })
     }
+
 
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user);
-        loginButton.style.display = "none";
-        logoutButton.style.display = "block";
+        loginGoogleButton.style.display = "none";
+        loginEmailButton.style.display = "none";
+        logoutButton.style.display = "";
+        emailLoginForm.style.display = "none";
       } else {
-        loginButton.style.display = "block";
+        loginGoogleButton.style.display = "";
+        loginEmailButton.style.display = "";
         logoutButton.style.display = "none";
       }
     })
-
-    let noidung = document.getElementById("noidung");
-    // let localStorageNoiDung = localStorage.getItem("noidung");
-    // if (localStorageNoiDung) {
-    //   document.getElementsByClassName("text")[0].style.display = "block";
-    //   noidung.innerHTML = localStorageNoiDung;
-    //   let lop = document.getElementById("lop");
-    //   lop.innerHTML = localStorage.getItem("lop");
-    //   let tongdiem = document.getElementById("tongdiem");
-    //   tongdiem.innerHTML = localStorage.getItem("tongdiem");
-    // } else {
-      // document.getElementsByClassName("text")[0].style.display = "none";
-    // }
-
 
     const sendButton = document.getElementById('send')
     const tfDiem = document.getElementById('diem')
     send.onclick = function UpdateData(){
       console.log(tfDiem.value);
-
-      update(ref(db, "diem/"),{
-          giamdinh3: tfDiem.value
-      })
-      .then(()=>{
-          console.log("Data added successfully");
-      })
-      .catch((error)=>{
-        console.log(error);
-      });
+      if(Number(tfDiem.value) && Number(tfDiem.value) >= 0 && Number(tfDiem.value) <= 100){
+        update(ref(db, "diem/"),{
+            giamdinh3: Number(tfDiem.value)
+        })
+        .then(()=>{
+            console.log("Data added successfully");
+        })
+        .catch((error)=>{
+          console.log(error);
+        });
+      } else {
+        alert("Chỉ nhập số trong khoảng 0 → 100")
+      }
     }
 
   </script>
