@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="refresh" content="2"> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;648&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+  <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+
+
+  <title>Vovinam Tranh Cúp Cóc Vàng</title>
+</head>
+
+<body>
+  <button id="login">Google Login</button>
+  <button id="logout">Google Logout</button>
+  <!-- <a href="./suathongtin.html" target="_blank"> -->
+  <div class="body">
+    <div class="text">
+      <div>
+        <span id="noidung">Giám định ３</span>
+      </div>
+      <!-- 
+      <div class="text-mid">
+        Lớp PC<span id="lop"></span>
+      </div> -->
+      <div>
+        <input type="text" id="diem" value="11">
+      </div>
+      <!-- <div class="text-bottom">
+        <span id="tongdiem">...</span>
+        điểm
+      </div> -->
+      <div>
+        <button id="send">Gửi</button>
+      </div>
+    </div>
+  </div>
+  <!-- </a> -->
+
+  <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import {getDatabase, ref, get, set, child, update, remove} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js'
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyCPlKZds5tvDwU4hKUp_GGU2D1nc1biDtQ",
+      authDomain: "olympicquynhoncampus.firebaseapp.com",
+      projectId: "olympicquynhoncampus",
+      storageBucket: "olympicquynhoncampus.appspot.com",
+      messagingSenderId: "758747044525",
+      appId: "1:758747044525:web:2fbc9000e189632f9c0424",
+      databaseURL: "https://olympicquynhoncampus-default-rtdb.asia-southeast1.firebasedatabase.app",
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase();
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider()
+
+    const loginButton = document.getElementById('login')
+    const logoutButton = document.getElementById('logout')
+    loginButton.onclick = async () => {
+      signInWithPopup(auth, provider)
+        .then((result) => {
+          const user = result.user
+          console.log(user);
+        }).catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message
+        })
+    }
+    logoutButton.onclick = async () => {
+      signOut(auth).then(() => {
+        alert("You have signed out successfully!");
+      }).catch((error) => { })
+    }
+
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        console.log(user);
+        loginButton.style.display = "none";
+        logoutButton.style.display = "block";
+      } else {
+        loginButton.style.display = "block";
+        logoutButton.style.display = "none";
+      }
+    })
+
+    let noidung = document.getElementById("noidung");
+    // let localStorageNoiDung = localStorage.getItem("noidung");
+    // if (localStorageNoiDung) {
+    //   document.getElementsByClassName("text")[0].style.display = "block";
+    //   noidung.innerHTML = localStorageNoiDung;
+    //   let lop = document.getElementById("lop");
+    //   lop.innerHTML = localStorage.getItem("lop");
+    //   let tongdiem = document.getElementById("tongdiem");
+    //   tongdiem.innerHTML = localStorage.getItem("tongdiem");
+    // } else {
+      // document.getElementsByClassName("text")[0].style.display = "none";
+    // }
+
+
+    const sendButton = document.getElementById('send')
+    const tfDiem = document.getElementById('diem')
+    send.onclick = function UpdateData(){
+      console.log(tfDiem.value);
+
+      update(ref(db, "diem/"),{
+          giamdinh3: tfDiem.value
+      })
+      .then(()=>{
+          console.log("Data added successfully");
+      })
+      .catch((error)=>{
+        console.log(error);
+      });
+    }
+
+  </script>
+</body>
+
+</html>
