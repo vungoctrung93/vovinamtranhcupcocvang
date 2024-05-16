@@ -14,14 +14,14 @@
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
 
 
-  <title>Vovinam Tranh Cúp Cóc Vàng</title>
+  <title>Olympic Quy Nhon Campus</title>
 </head>
 
 <body>
-  <div class="button-group">
-    <button id="loginGoogle">Google Login</button>
+  <div class="button-group-admin">
     <button id="logout">Logout</button>
     <button id="loginEmail">Email Login</button>
+    <button id="remove">Xóa Điểm</button>
   </div>
   <div class="form-container" id="myForm">
     <h1>Login</h1>
@@ -68,9 +68,7 @@
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
     import { getDatabase, ref, get, set, child, update, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
 
-    import { getAuth, GoogleAuthProvider, signInWithPopup, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js'
-    // TODO: Add SDKs for Firebase products that you want to use
-    // https://firebase.google.com/docs/web/setup#available-libraries
+    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js'
 
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -87,20 +85,7 @@
     const app = initializeApp(firebaseConfig);
     const db = getDatabase();
     const auth = getAuth();
-    const providerGoogle = new GoogleAuthProvider()
 
-    const loginGoogleButton = document.getElementById('loginGoogle')
-    loginGoogleButton.onclick = async () => {
-      signInWithPopup(auth, providerGoogle)
-        .then((result) => {
-          const user = result.user
-          // console.log(user);
-        }).catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message
-          console.log(error);
-        })
-    }
     const emailLoginForm = document.getElementById("myForm");
     emailLoginForm.style.display = 'none'
     const loginEmailButton = document.getElementById('loginEmail')
@@ -124,6 +109,7 @@
             const user = userCredential.user;
             // console.log(user);
             // ...
+            location.reload();
           })
           .catch((error) => {
             console.log(error);
@@ -144,14 +130,14 @@
     onAuthStateChanged(auth, (user) => {
       if (user) {
         console.log(user);
-        loginGoogleButton.style.display = "none";
         loginEmailButton.style.display = "none";
         logoutButton.style.display = "";
         emailLoginForm.style.display = "none";
+        removeButton.style.display = '';
       } else {
-        loginGoogleButton.style.display = "";
         loginEmailButton.style.display = "";
         logoutButton.style.display = "none";
+        removeButton.style.display = 'none';
       }
     })
 
@@ -159,15 +145,12 @@
 
 
     let noidung = document.getElementById("noidung");
-    // ref(db, "diem/").once('value').then((snapshot) => {
-    //   console.log(snapshot);
-    // })
 
     onValue(ref(db, "diem/"), (snapshot) => {
       if (snapshot.exists()) {
-        const giamdinh1 = snapshot.val().giamdinh1;
-        const giamdinh2 = snapshot.val().giamdinh2;
-        const giamdinh3 = snapshot.val().giamdinh3;
+        const giamdinh1 = Number(snapshot.val().giamdinh1);
+        const giamdinh2 = Number(snapshot.val().giamdinh2);
+        const giamdinh3 = Number(snapshot.val().giamdinh3);
         let tongdiem = document.getElementById("tongdiem");
         let giamdinh1Table = document.getElementById("giamdinh1");
         let giamdinh2Table = document.getElementById("giamdinh2");
@@ -176,18 +159,36 @@
           const tongdiemRounded = giamdinh1 - -giamdinh2 - -giamdinh3;
           document.getElementsByClassName("text")[0].style.display = "block";
           tongdiem.innerHTML = tongdiemRounded;
-          giamdinh1Table.innerHTML = giamdinh1;
-          giamdinh2Table.innerHTML = giamdinh2;
-          giamdinh3Table.innerHTML = giamdinh3;
         } else {
           tongdiem.innerHTML = '...';
-          giamdinh.innerHTML = '...';
         }
+        giamdinh1Table.innerHTML = snapshot.val().giamdinh1;
+        giamdinh2Table.innerHTML = snapshot.val().giamdinh2;
+        giamdinh3Table.innerHTML = snapshot.val().giamdinh3;
       } else {
         console.log("No data found");
         document.getElementsByClassName("text")[0].style.display = "none";
       }
     })
+
+
+    function RemoveData() {
+      update(ref(db, "diem/"), {
+        giamdinh1: "　",
+        giamdinh2: "　",
+        giamdinh3: "　"
+      })
+        .then(() => {
+          console.log("Data remove successfully");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+
+    const removeButton = document.getElementById('remove')
+    removeButton.onclick = RemoveData;
+    removeButton.style.display = 'none';
 
   </script>
 </body>
