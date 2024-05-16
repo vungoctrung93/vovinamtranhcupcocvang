@@ -150,9 +150,7 @@
       }
     })
 
-    const sendButton = document.getElementById('send')
-    const tfDiem = document.getElementById('diem')
-    send.onclick = function UpdateData(){
+    function UpdateData(){
       console.log(tfDiem.value);
       if(Number(tfDiem.value) && Number(tfDiem.value) >= 0 && Number(tfDiem.value) <= 100){
         update(ref(db, "diem/"),{
@@ -168,6 +166,14 @@
         alert("Chỉ nhập số trong khoảng 0 → 100")
       }
     }
+    const sendButton = document.getElementById('send')
+    const tfDiem = document.getElementById('diem')
+    tfDiem.onkeypress = (event) => {
+      if(event.charCode == 13){
+        UpdateData();
+      }
+    }
+    send.onclick = UpdateData;
 
   </script>
 </body>
