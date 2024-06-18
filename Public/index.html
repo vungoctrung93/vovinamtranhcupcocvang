@@ -12,185 +12,19 @@
   <link rel="stylesheet" href="index.css">
   <script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
   <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+  <link type="image/x-icon" href="https://st.truonghyvong.edu.vn/v9/images/favicon.png" rel="shortcut icon">
 
-
-  <title>Olympic Quy Nhon Campus</title>
+  <title>HOPE JAPANESE 1</title>
 </head>
 
 <body>
-  <div class="button-group-admin">
-    <button id="logout">Logout</button>
-    <button id="loginEmail">Email Login</button>
-    <button id="remove">Xóa Điểm</button>
+  <div class="textgroup" id="textgroup">
+
   </div>
-  <div class="form-container" id="myForm">
-    <h1>Login</h1>
-
-    <label for="email"><b>Email</b></label>
-    <input type="text" placeholder="Enter Email" id="email" required>
-
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" id="password" required>
-
-    <button type="button" class="btn" id="loginEmailPopup">Login</button>
-    <button type="button" class="btn cancel" id="closeForm">Cancel</button>
-  </div>
-  <!-- <a href="./suathongtin.html" target="_blank"> -->
   <div class="body">
-    <div class="text">
-      <!-- <div>
-        <span id="noidung"></span>
-      </div> -->
-      <div class="text-mid">
-        <span id="tongdiem">...</span>
-        điểm
-      </div>
-      <div class="text-bottom">
-        <table class="giamdinh-table">
-          <tr>
-            <td>Điểm GĐ 1</td>
-            <td>Điểm GĐ 2</td>
-            <td>Điểm GĐ 3</td>
-          </tr>
-          <tr class="diem-table">
-            <td><span id="giamdinh1" class="giamdinh"></span></td>
-            <td><span id="giamdinh2" class="giamdinh"></span></td>
-            <td><span id="giamdinh3" class="giamdinh"></span></td>
-          </tr>
-        </table>
-      </div>
-    </div>
   </div>
-  <!-- </a> -->
-
-  <script type="module">
-    // Import the functions you need from the SDKs you need
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getDatabase, ref, get, set, child, update, remove, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js";
-
-    import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js'
-
-    // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: "AIzaSyCPlKZds5tvDwU4hKUp_GGU2D1nc1biDtQ",
-      authDomain: "olympicquynhoncampus.firebaseapp.com",
-      projectId: "olympicquynhoncampus",
-      storageBucket: "olympicquynhoncampus.appspot.com",
-      messagingSenderId: "758747044525",
-      appId: "1:758747044525:web:2fbc9000e189632f9c0424",
-      databaseURL: "https://olympicquynhoncampus-default-rtdb.asia-southeast1.firebasedatabase.app",
-    };
-
-    // Initialize Firebase
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase();
-    const auth = getAuth();
-
-    const emailLoginForm = document.getElementById("myForm");
-    emailLoginForm.style.display = 'none'
-    const loginEmailButton = document.getElementById('loginEmail')
-    loginEmailButton.onclick = async () => {
-      emailLoginForm.style.display = "block";
-    }
-    const loginEmailClose = document.getElementById('closeForm')
-    loginEmailClose.onclick = async () => {
-      emailLoginForm.style.display = "none";
-    }
-
-    const loginEmailPopup = document.getElementById('loginEmailPopup');
-    loginEmailPopup.onclick = function () {
-      let email = document.getElementById('email').value;
-      if (email) {
-        let password = document.getElementById('password').value;
-
-        signInWithEmailAndPassword(auth, email, password)
-          .then((userCredential) => {
-            // Signed in 
-            const user = userCredential.user;
-            // console.log(user);
-            // ...
-            location.reload();
-          })
-          .catch((error) => {
-            console.log(error);
-          });
-      }
-    }
-
-
-    const logoutButton = document.getElementById('logout');
-    logoutButton.style.display = 'none'
-    logoutButton.onclick = async () => {
-      signOut(auth).then(() => {
-        console.log("You have signed out successfully!");
-      }).catch((error) => { })
-    }
-
-
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        console.log(user);
-        loginEmailButton.style.display = "none";
-        logoutButton.style.display = "";
-        emailLoginForm.style.display = "none";
-        removeButton.style.display = '';
-      } else {
-        loginEmailButton.style.display = "";
-        logoutButton.style.display = "none";
-        removeButton.style.display = 'none';
-      }
-    })
-
-
-
-
-    let noidung = document.getElementById("noidung");
-
-    onValue(ref(db, "diem/"), (snapshot) => {
-      if (snapshot.exists()) {
-        const giamdinh1 = Number(snapshot.val().giamdinh1);
-        const giamdinh2 = Number(snapshot.val().giamdinh2);
-        const giamdinh3 = Number(snapshot.val().giamdinh3);
-        let tongdiem = document.getElementById("tongdiem");
-        let giamdinh1Table = document.getElementById("giamdinh1");
-        let giamdinh2Table = document.getElementById("giamdinh2");
-        let giamdinh3Table = document.getElementById("giamdinh3");
-        if (giamdinh1 && giamdinh2 && giamdinh3) {
-          const tongdiemRounded = giamdinh1 - -giamdinh2 - -giamdinh3;
-          document.getElementsByClassName("text")[0].style.display = "block";
-          tongdiem.innerHTML = tongdiemRounded;
-        } else {
-          tongdiem.innerHTML = '...';
-        }
-        giamdinh1Table.innerHTML = snapshot.val().giamdinh1;
-        giamdinh2Table.innerHTML = snapshot.val().giamdinh2;
-        giamdinh3Table.innerHTML = snapshot.val().giamdinh3;
-      } else {
-        console.log("No data found");
-        document.getElementsByClassName("text")[0].style.display = "none";
-      }
-    })
-
-
-    function RemoveData() {
-      update(ref(db, "diem/"), {
-        giamdinh1: "　",
-        giamdinh2: "　",
-        giamdinh3: "　"
-      })
-        .then(() => {
-          console.log("Data remove successfully");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-
-    const removeButton = document.getElementById('remove')
-    removeButton.onclick = RemoveData;
-    removeButton.style.display = 'none';
-
-  </script>
+  <button onclick="clearPoint()">Clear Point</button>
+  <script src="index.js"></script>
 </body>
 
 </html>

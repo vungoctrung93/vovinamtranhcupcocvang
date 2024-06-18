@@ -2,144 +2,52 @@
 .body {
   background-image: url("./images/BACKDROP.jpg");
   background-repeat: no-repeat;
-  background-size: auto 100%;
+  background-size: 100%;
   background-position: center;
-  height: 100vh;
+  height: 33vh;
+  width: 100%;
   padding: 0;
   margin: 0 auto;
+  position: relative;
+  /* transform: translateY(-10px); */
+  z-index: -1;
 }
-
-body {
-  background-color: black;
-  font-family: 'Raleway';
-  /* font-weight: bold; */
-  margin: 0 !important;
-  color: #FFF !important;
-}
-
-.text {
-  font-size: 6vh;
-  font-weight: bold;
-  margin: 0 auto;
+.textgroup {
+  /* position: absolute; */
   width: 100%;
-  text-align: center;
-  vertical-align: middle;
-  transform: translateY(49vh);
-  text-transform: uppercase;
-  color: white;
-  /* text-shadow: 0em 0em 0em #fbff00,
-            0em 0em 1.2em #fbff00,
-            0em 0em 1em #ff0000,
-            0em 0em 0.8em #ff0000,
-            0em 0em 0.6em #ff0000,
-            0em 0em 0.4em #ff0000,
-            0em 0em 0.3em #ff0000,
-            0em 0em 0.2em #ff0000 */
+  /* text-shadow: 0em 0em 1em #000000,
+            0em 0em 1.2em #000000,
+            0em 0em 1em #000000,
+            0em 0em 1.8em #000000,
+            0em 0em 1.6em #000000,
+            0em 0em 1.4em #000000,
+            0em 0em 1.3em #000000,
+            0em 0em 1.2em #000000;
+  color: white; */
+            
+  display: grid;
+  grid-template-columns: 33.3% 33.3% 33.3% ; 
+  color: blue;
 }
 
-#noidung {
-  font-size: 11vh;
+.cell {
+  border-radius: 10px; 
+  padding-bottom: 10px;
+  padding-right: 10px;
+  opacity: 100%;
+  font-size: 16px;
+  
 }
-
-.text-mid {
-  transform: translateY(3vh);
-  font-size: 14vh;
+.cell button {
+  float: right;
 }
-.text-bottom {
-  transform: translateY(6vh);
-  font-size: 7vh;
+.cell .point {
+  float: right;
+  padding-right: 10px;
 }
-
-.body {
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: normal;
+.top-rank {
+  color: grey;
 }
-
-#giamdinh {
-  font-size: 12vh;
-}
-.giamdinh-table {
-  width: 90%;
-  margin: 0 auto;
-}
-.diem-table td{
-  border: 1px solid;
-}
-#diem {
-  margin-top: 20px;
-  width: 24vh;
-  font-size: 8vh;
-  text-align: center;
-}
-.send-data button, .button-group button{
-  margin-top: 20px;
-  font-size: 5vh;
-  padding: 1.5vh;
-}
-
-a {
-  color: yellow;
-  background-color: transparent;
-  text-decoration: none;
-  text-shadow: 0px 0px 26px #000000
-}
-
-.button-group, .button-group-admin {
-  position: absolute;
-}
-.button-group button {
-  margin: 10px;
-}
-
-/* Add styles to the form container */
-.form-container {
-  max-width: 300px;
-  padding: 10px;
-  background-color: white;
-  position: absolute;
-  top: 25%;
-  margin-left: auto;
-  margin-right: auto;
-  left: 0;
-  right: 0;
-  text-align: center;
-  z-index: 999;
-  color: black;
-}
-
-/* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
-  width: 90%;
-  padding: 15px 5%;
-  margin: 5px 0 22px 0;
-  border: none;
-  background: #f1f1f1;
-}
-
-/* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
-  background-color: #ddd;
-  outline: none;
-}
-
-/* Set a style for the submit/login button */
-.form-container .btn {
-  background-color: #04AA6D;
-  color: white;
-  padding: 16px 20px;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
-}
-
-/* Add a red background color to the cancel button */
-.form-container .cancel {
-  background-color: red;
-}
-
-/* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
+.plus-button {
+  margin-right: 5px;
 }
