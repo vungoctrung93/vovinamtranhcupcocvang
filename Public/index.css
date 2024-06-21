@@ -42,11 +42,11 @@ body {
 }
 
 .text-mid {
-  transform: translateY(3vh);
+  transform: translateY(-24vh);
   font-size: 14vh;
 }
 .text-bottom {
-  transform: translateY(6vh);
+  transform: translateY(-10vh);
   font-size: 7vh;
 }
 
@@ -58,6 +58,12 @@ body {
 #giamdinh {
   font-size: 12vh;
 }
+.giamdinhgroup {
+  transform: translateY(29vh);
+}
+.text.giamdinh {
+  transform: translateY(29vh);
+}
 .giamdinh-table {
   width: 90%;
   margin: 0 auto;
@@ -66,10 +72,13 @@ body {
   border: 1px solid;
 }
 #diem {
-  margin-top: 20px;
-  width: 24vh;
+  transform: translate(-1vh,-6vh);
+  width: 48vh;
+  height: 19vh;
   font-size: 8vh;
   text-align: center;
+  background-color: black;
+  color: white;
 }
 .send-data button, .button-group button{
   margin-top: 20px;

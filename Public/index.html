@@ -42,20 +42,23 @@
         <span id="noidung"></span>
       </div> -->
       <div class="text-mid">
-        <span id="tongdiem">...</span>
-        điểm
+        <span id="tongdiem">300</span>
       </div>
       <div class="text-bottom">
         <table class="giamdinh-table">
           <tr>
-            <td>Điểm GĐ 1</td>
-            <td>Điểm GĐ 2</td>
-            <td>Điểm GĐ 3</td>
+            <td>GK 1</td>
+            <td>GK 2</td>
+            <td>GK 3</td>
+            <td>GK 4</td>
+            <td>GK 5</td>
           </tr>
           <tr class="diem-table">
             <td><span id="giamdinh1" class="giamdinh"></span></td>
             <td><span id="giamdinh2" class="giamdinh"></span></td>
             <td><span id="giamdinh3" class="giamdinh"></span></td>
+            <td><span id="giamdinh4" class="giamdinh"></span></td>
+            <td><span id="giamdinh5" class="giamdinh"></span></td>
           </tr>
         </table>
       </div>
@@ -151,12 +154,16 @@
         const giamdinh1 = Number(snapshot.val().giamdinh1);
         const giamdinh2 = Number(snapshot.val().giamdinh2);
         const giamdinh3 = Number(snapshot.val().giamdinh3);
+        const giamdinh4 = Number(snapshot.val().giamdinh4);
+        const giamdinh5 = Number(snapshot.val().giamdinh5);
         let tongdiem = document.getElementById("tongdiem");
         let giamdinh1Table = document.getElementById("giamdinh1");
         let giamdinh2Table = document.getElementById("giamdinh2");
         let giamdinh3Table = document.getElementById("giamdinh3");
-        if (giamdinh1 && giamdinh2 && giamdinh3) {
-          const tongdiemRounded = giamdinh1 - -giamdinh2 - -giamdinh3;
+        let giamdinh4Table = document.getElementById("giamdinh4");
+        let giamdinh5Table = document.getElementById("giamdinh5");
+        if (giamdinh1 && giamdinh2 && giamdinh3 && giamdinh4 && giamdinh5) {
+          const tongdiemRounded = giamdinh1 - -giamdinh2 - -giamdinh3 - -giamdinh4 - -giamdinh5;
           document.getElementsByClassName("text")[0].style.display = "block";
           tongdiem.innerHTML = tongdiemRounded;
         } else {
@@ -165,6 +172,8 @@
         giamdinh1Table.innerHTML = snapshot.val().giamdinh1;
         giamdinh2Table.innerHTML = snapshot.val().giamdinh2;
         giamdinh3Table.innerHTML = snapshot.val().giamdinh3;
+        giamdinh4Table.innerHTML = snapshot.val().giamdinh4;
+        giamdinh5Table.innerHTML = snapshot.val().giamdinh5;
       } else {
         console.log("No data found");
         document.getElementsByClassName("text")[0].style.display = "none";
@@ -174,9 +183,11 @@
 
     function RemoveData() {
       update(ref(db, "diem/"), {
-        giamdinh1: "　",
-        giamdinh2: "　",
-        giamdinh3: "　"
+        giamdinh1: "...",
+        giamdinh2: "...",
+        giamdinh3: "...",
+        giamdinh4: "...",
+        giamdinh5: "..."
       })
         .then(() => {
           console.log("Data remove successfully");

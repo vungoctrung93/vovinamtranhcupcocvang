@@ -1,6 +1,6 @@
 {
   "rules": {
     ".read": "auth != null",
-    ".write": "auth.token.email.endsWith('giamdinh1@gmail.com')||auth.token.email.endsWith('giamdinh2@gmail.com')||auth.token.email.endsWith('giamdinh3@gmail.com')||auth.token.email.endsWith('display1@gmail.com')"
+    ".write": "auth.token.email.endsWith('giamdinh1@gmail.com')||auth.token.email.endsWith('giamdinh2@gmail.com')||auth.token.email.endsWith('giamdinh3@gmail.com')||auth.token.email.endsWith('giamdinh4@gmail.com')||auth.token.email.endsWith('giamdinh5@gmail.com')||auth.token.email.endsWith('display1@gmail.com')"
   }
 }

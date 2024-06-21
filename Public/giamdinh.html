@@ -35,17 +35,17 @@
     <button type="button" class="btn cancel" id="closeForm">Cancel</button>
   </div>
   <div class="body">
-    <div class="text">
+    <div class="text giamdinh">
       <div>
-        <span id="noidung">Giám định <span id='giamdinhso'>Hãy đăng nhập</span></span>
+        <input type="text" id="diem" value="" placeholder="0 → 100">
+      </div>
+      <div id="giamdinhgroup">
+        <span id="noidung">Giám khảo <span id='giamdinhso'>Hãy đăng nhập</span></span>
       </div>
       <!-- 
       <div class="text-mid">
         Lớp PC<span id="lop"></span>
       </div> -->
-      <div>
-        <input type="text" id="diem" value="">
-      </div>
       <!-- <div class="text-bottom">
         <span id="tongdiem">...</span>
         điểm
@@ -139,11 +139,13 @@
           tfGiamDinhSo.innerText = giamDinhSo;
           sendData.style.display = ''
           diem.style.display = ''
+        document.getElementById('giamdinhgroup').className ="";
         }
       } else {
         loginEmailButton.style.display = "";
         logoutButton.style.display = "none";
         tfGiamDinhSo.innerText = "Hãy đăng nhập";
+        document.getElementById('giamdinhgroup').className ="giamdinhgroup";
         sendData.style.display = 'none'
         diem.style.display = 'none'
       }
@@ -168,7 +170,7 @@
     function RemoveData(){
 
       if(giamDinhSo && giamDinhSo != -1){
-        console.log(1);
+        tfDiem.value = "";
         const sentObject = {};
         sentObject['giamdinh'+giamDinhSo] = '...'
         update(ref(db, "diem/"), sentObject)
