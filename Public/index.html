@@ -27,45 +27,40 @@
       font-family: 'Raleway';
       /* font-weight: bold; */
       margin: 0 !important;
-      color: #FFF !important;
+      color: rgb(255, 208, 0) !important;
     }
- 
+
     .text {
-      font-size: 6vh;
+      font-size: 5vh;
       margin: 0 auto;
       width: 100%;
       text-align: center;
       vertical-align: middle;
-      transform: translateY(45vh);
+      transform: translateY(44vh);
       text-transform: uppercase;
-      color: rgb(236, 21, 21);
-      text-shadow: 0em 0em 0em #f0d457,
-                0em 0em 1.2em #c9a713f7,
-                0em 0em 1em #c9a713f7,
-                0em 0em 0.8em #c9a713f7,
-                0em 0em 0.6em #c9a713f7,
-                0em 0em 0.4em #c9a713f7,
-                0em 0em 0.3em #c9a713f7,
-                0em 0em 0.2em #c9a713f7
+      font-weight: bold;
+      color: white;
+      -webkit-text-stroke: 2px #fff;
     }
 
     #noidung {
       font-weight: 800 !important;
-      font-size: 11vh;
+      font-size: 7vh;
     }
 
     .text-bottom {
-      transform: translateY(3vh);
-      font-size: 14vh;
-      color: rgb(189, 7, 7);
-      text-shadow: 0em 0em 0em #e5bf18,
-                0em 0em 1.2em #c9a713f7, 
-                0em 0em 1em #c9a713f7, 
-                0em 0em 0.8em #e7c117f7,
-                0em 0em 0.6em #e7c117f7,
-                0em 0em 0.4em #e7c117f7,
-                0em 0em 0.3em #e7c117f7, 
-                0em 0em 0.2em #e7c117f7
+      transform: translateY(6vh);
+      font-size: 11vh;
+      color: rgb(255, 48, 48);
+      -webkit-text-stroke: 0px #fff;
+      text-shadow: 0em 0em 0em rgb(255, 208, 0),
+        0em 0em 1.2em rgb(255, 208, 0),
+        0em 0em 1em rgb(255, 208, 0),
+        0em 0em 0.8em rgb(255, 208, 0),
+        0em 0em 0.6em rgb(255, 208, 0),
+        0em 0em 0.4em rgb(255, 208, 0),
+        0em 0em 0.3em rgb(255, 208, 0),
+        0em 0em 0.2em rgb(255, 208, 0)
     }
 
     #tongdiem,
@@ -83,26 +78,27 @@
       color: yellow;
       background-color: transparent;
       text-decoration: none;
-      text-shadow: 0px 0px 26px #000000
+      text-shadow: 0px 0px 25px #000000
     }
   </style>
 </head>
 
 <body><a href="./suathongtin.html" target="_blank">
-  <div class="body">
-    <div class="text">
-      <div>
-        <span id="noidung"></span>
-      </div>
-      <div class="text-mid">
-        Lớp PC<span id="lop"></span>
-      </div>
-      <div class="text-bottom">
-        <span id="tongdiem"></span>
-        điểm
+    <div class="body">
+      <div class="text">
+        <div>
+          <span id="noidung"></span>
+        </div>
+        <div class="text-mid">
+          Lớp PC<span id="lop"></span>
+        </div>
+        <div class="text-bottom">
+          <span id="tongdiem"></span>
+          điểm
+        </div>
       </div>
     </div>
-  </div></a>
+  </a>
 
 
   <script>
@@ -122,6 +118,7 @@
 
   </script>
 </body>
-  <script src="./firebase.js"></script>
-  <script src="./firebase.js"></script>
+<script src="./firebase.js"></script>
+<script src="./firebase.js"></script>
+
 </html>
