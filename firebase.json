@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "cocvuongfuda2025",
     "public": "Public",
     "ignore": [
       "firebase.json",
