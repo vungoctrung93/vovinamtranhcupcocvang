@@ -10,7 +10,7 @@ const firebaseConfig = {
   projectId: "cocvuongfuda2023",
   storageBucket: "cocvuongfuda2023.firebasestorage.app",
   messagingSenderId: "496059628444",
-  appId: "1:496059628444:web:d620d643f035b98bf36659"
+  appId: "1:496059628444:web:d794852748879ffdf36659"
 };
 
 // Initialize Firebase
