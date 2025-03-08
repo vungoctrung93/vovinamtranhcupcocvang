@@ -27,45 +27,46 @@
       font-family: 'Raleway';
       /* font-weight: bold; */
       margin: 0 !important;
-      color: #FFF !important;
+      color: rgb(255, 208, 0) !important;
     }
- 
+
     .text {
-      font-size: 6vh;
+      font-size: 7vh;
       margin: 0 auto;
       width: 100%;
       text-align: center;
       vertical-align: middle;
-      transform: translateY(19vh);
+      transform: translateY(46vh);
       text-transform: uppercase;
-      color: yellow;
-      text-shadow: 0em 0em 0em #ff0000,
-                0em 0em 1.2em #ff0000,
-                0em 0em 1em #ff0000,
-                0em 0em 0.8em #ff0000,
-                0em 0em 0.6em #ff0000,
-                0em 0em 0.4em #ff0000,
-                0em 0em 0.3em #ff0000,
-                0em 0em 0.2em #ff0000
+      font-weight: bold;
+      color: white;
+      text-shadow: 2px 0 rgb(255, 208, 0),
+        -2px 0 rgb(255, 208, 0),
+        0 2px rgb(255, 208, 0),
+        0 -2px rgb(255, 208, 0),
+        1px 1px rgb(255, 208, 0),
+        -1px -1px rgb(255, 208, 0),
+        1px -1px rgb(255, 208, 0),
+        -1px 1px rgb(255, 208, 0);
     }
 
     #noidung {
       font-weight: 800 !important;
-      font-size: 11vh;
+      font-size: 8vh;
     }
 
     .text-bottom {
       transform: translateY(3vh);
       font-size: 14vh;
-      color: yellow;
-      text-shadow: 0em 0em 0em #ff0000,
-                0em 0em 1.2em #ff0000,
-                0em 0em 1em #ff0000,
-                0em 0em 0.8em #ff0000,
-                0em 0em 0.6em #ff0000,
-                0em 0em 0.4em #ff0000,
-                0em 0em 0.3em #ff0000,
-                0em 0em 0.2em #ff0000
+      color: white;
+      text-shadow: 0em 0em 0em rgb(255, 208, 0),
+        0em 0em 1.2em rgb(255, 208, 0),
+        0em 0em 1em rgb(255, 208, 0),
+        0em 0em 0.8em rgb(255, 208, 0),
+        0em 0em 0.6em rgb(255, 208, 0),
+        0em 0em 0.4em rgb(255, 208, 0),
+        0em 0em 0.3em rgb(255, 208, 0),
+        0em 0em 0.2em rgb(255, 208, 0)
     }
 
     #tongdiem,
@@ -83,26 +84,27 @@
       color: yellow;
       background-color: transparent;
       text-decoration: none;
-      text-shadow: 0px 0px 26px #000000
+      text-shadow: 0px 0px 25px #000000
     }
   </style>
 </head>
 
 <body><a href="./suathongtin.html" target="_blank">
-  <div class="body">
-    <div class="text">
-      <div>
-        <span id="noidung"></span>
-      </div>
-      <div class="text-mid">
-        Lớp PC<span id="lop"></span>
-      </div>
-      <div class="text-bottom">
-        <span id="tongdiem"></span>
-        điểm
+    <div class="body">
+      <div class="text">
+        <div>
+          <span id="noidung"></span>
+        </div>
+        <div class="text-mid">
+          Lớp PC<span id="lop"></span>
+        </div>
+        <div class="text-bottom">
+          <span id="tongdiem"></span>
+          điểm
+        </div>
       </div>
     </div>
-  </div></a>
+  </a>
 
 
   <script>
@@ -122,5 +124,7 @@
 
   </script>
 </body>
+<script src="./firebase.js"></script>
+<script src="./firebase.js"></script>
 
 </html>

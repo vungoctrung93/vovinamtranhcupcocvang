@@ -1,17 +1,11 @@
 {
   "hosting": {
-    "public": "public",
-    "site": "vovinam-tranhcupcocvang",
+    "site": "cocvuongfuda2025",
+    "public": "Public",
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
     ]
   }
 }
